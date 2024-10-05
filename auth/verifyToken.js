@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { jwtSecretKey } from "../src/secret.js";
 import User from "../models/UserSchema.js";
 import Instactor from "../models/InstactorSchema.js";
 
@@ -18,7 +17,7 @@ export const authenticate = async (req, res, next) => {
     const token = authToken.split(" ")[1];
 
     //verify token
-    const decoded = jwt.verify(token, jwtSecretKey);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.userId = decoded.id;
     req.role = decoded.role;
 

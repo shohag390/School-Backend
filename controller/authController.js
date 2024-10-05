@@ -2,12 +2,15 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/UserSchema.js";
 import Instactor from "../models/InstactorSchema.js";
-import { jwtSecretKey } from "../src/secret.js";
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id, role: user.role }, jwtSecretKey, {
-    expiresIn: "365d",
-  });
+  return jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: "365d",
+    }
+  );
 };
 
 export const register = async (req, res) => {
