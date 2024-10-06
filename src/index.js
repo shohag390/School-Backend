@@ -9,6 +9,7 @@ import instactorRouter from "../routes/instactorRoute.js";
 import courseRouter from "../routes/courseRoute.js";
 import reviewRouter from "../routes/reviewRoute.js";
 import dotenv from "dotenv";
+import orderRouter from "../routes/orderRoute.js";
 
 //config
 dotenv.config();
@@ -44,6 +45,7 @@ app.use("/api/users", userRouter);
 app.use("/api/instactor", instactorRouter);
 app.use("/api/course", courseRouter);
 app.use("/api", reviewRouter);
+app.use("/api", orderRouter);
 
 app.listen(port, () => {
   connectDB();

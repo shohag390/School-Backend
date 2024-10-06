@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    instactor: {
-      type: mongoose.Types.ObjectId,
-      ref: "Instactor",
-    },
     user: {
       type: mongoose.Types.ObjectId,
       ref: "User",

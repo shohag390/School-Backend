@@ -10,7 +10,6 @@ const instactorSchema = new mongoose.Schema(
     occupation: { type: String, required: true },
     bio: { type: String, required: true },
     course: [{ type: mongoose.Types.ObjectId, ref: "Course" }],
-    order: [{ type: mongoose.Types.ObjectId, ref: "Order" }],
     role: {
       type: String,
     },
@@ -21,6 +20,12 @@ const instactorSchema = new mongoose.Schema(
 instactorSchema.pre(/^find/, function (next) {
   this.populate({
     path: "course",
+    populate: {
+      path: "order",
+      populate: {
+        path: "course",
+      },
+    },
   });
   next();
 });

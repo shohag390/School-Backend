@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
     phone: { type: String, required: true },
     occupation: { type: String, required: true },
     bio: { type: String, required: true },
-    course: [{ type: mongoose.Types.ObjectId, ref: "Course" }],
     order: [{ type: mongoose.Types.ObjectId, ref: "Order" }],
     role: {
       type: String,
@@ -19,5 +18,15 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "order",
+    populate: {
+      path: "course",
+    },
+  });
+  next();
+});
 
 export default mongoose.model("User", userSchema);
